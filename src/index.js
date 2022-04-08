@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose
   .connect(
-    "mongodb+srv://priyanka:PriyankaRajput@cluster0.fhqcn.mongodb.net/FIRST-PROJECT?retryWrites=true&w=majority",
+    "mongodb+srv://prashannjeet:Prashannjeet02@cluster0.fhqcn.mongodb.net/URL_Shortner?retryWrites=true&w=majority",
     {
       useNewUrlParser: true,
     }
@@ -22,8 +22,3 @@ app.use("/", route);
 app.listen(process.env.PORT || 3000, function () {
   console.log("Express app running on port " + (process.env.PORT || 3000));
 });
-
-
-
-
-//mongodb+srv://rohankesarkar:rohan123@cluster0.sgev7.mongodb.net/urlShortner

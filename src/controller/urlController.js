@@ -47,11 +47,11 @@ const createUrl = async function (req, res) {
     let body = req.body;
     let query = req.query;
 
-    let cahcedLongUrl= await GET_ASYNC(`${longUrl}`)
-    if(cahcedLongUrl){
-      let copy = JSON.parse(cahcedLongUrl)
-      console.log("from Chache")
-      return res.status(200).send({status:false,data:copy})
+    let cahcedLongUrl = await GET_ASYNC(`${longUrl}`);
+    if (cahcedLongUrl) {
+      let copy = JSON.parse(cahcedLongUrl);
+      console.log("from Chache");
+      return res.status(200).send({ status: false, data: copy });
     }
 
     if (!isValidBody(body)) {
@@ -90,16 +90,16 @@ const createUrl = async function (req, res) {
       urlCode,
     };
 
-    // 
+    //
     // await SET_ASYNC(`${req.params.authorId}`, JSON.stringify(profile))
     let longUrlExist = await urlModel
       .findOne({ longUrl: longUrl })
       .select({ longUrl: 1, shortUrl: 1, urlCode: 1, _id: 0 });
-   // await GET_ASYNC(`${longUrl}`, JSON.stringify(longUrlExist));
+    // await GET_ASYNC(`${longUrl}`, JSON.stringify(longUrlExist));
 
     if (longUrlExist) {
-      await SET_ASYNC(`${longUrl}`, JSON.stringify(longUrlExist))
-      console.log("frommongodb")
+      await SET_ASYNC(`${longUrl}`, JSON.stringify(longUrlExist));
+      console.log("frommongodb");
       return res.status(201).send({ status: true, msg: longUrlExist });
     }
 
@@ -107,7 +107,7 @@ const createUrl = async function (req, res) {
     let response = await urlModel
       .findOne({ _id: savedData._id })
       .select({ longUrl: 1, shortUrl: 1, urlCode: 1, _id: 0 });
-    
+
     return res.status(201).send({ status: true, msg: response });
   } catch (err) {
     console.log("This is the error :", err.message);
